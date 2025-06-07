@@ -22,28 +22,6 @@ API desenvolvida em **Laravel 12** para gerenciamento de empréstimos de livros,
 
 ---
 
-## **Estrutura inicial do projeto**
-
-```
-biblioteca/
-├── app/
-├── database/
-│   ├── migrations/
-│   └── seeders/
-├── routes/
-│   ├── api.php
-│   └── web.php
-├── tests/
-│   ├── Feature/
-│   └── Unit/
-├── .env
-├── composer.json
-├── phpunit.xml
-└── README.md
-```
-
----
-
 ## **Passo a passo executado até o momento**
 
 1. **Criação do projeto Laravel**
@@ -52,14 +30,7 @@ biblioteca/
    cd biblioteca
    ```
 
-2. **Inicialização do repositório git**
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: estrutura inicial do projeto Laravel biblioteca"
-   ```
-
-3. **Configuração do banco de dados MySQL**
+2. **Configuração do banco de dados MySQL**
    - Criada a base `biblioteca` no MySQL.
    - Ajustado o arquivo `.env`:
      ```
@@ -71,19 +42,19 @@ biblioteca/
      DB_PASSWORD=sua_senha
      ```
 
-4. **Execução das migrations iniciais**
+3. **Execução das migrations iniciais**
    ```bash
    php artisan migrate
    ```
 
-5. **Instalação do Laravel Breeze para API**
+4. **Instalação do Laravel Breeze para API**
    ```bash
    composer require laravel/breeze --dev
    php artisan breeze:install api
    php artisan migrate
    ```
 
-6. **Configuração de autenticação via token (Sanctum)**
+5. **Configuração de autenticação via token (Sanctum)**
    - Adicionado trait `HasApiTokens` ao model `User`.
    - Ajustado o controller `AuthenticatedSessionController` para usar **token** (API) e não **sessão** (web).
    - Corrigido `.env` para:
@@ -91,7 +62,7 @@ biblioteca/
      SESSION_DRIVER=array
      ```
 
-7. **Criação de seeder para usuário admin**
+6. **Criação de seeder para usuário admin**
    - Arquivo: `database/seeders/AdminUserSeeder.php`
    - Comando para rodar:
      ```bash
@@ -104,7 +75,7 @@ biblioteca/
      role: admin
      ```
 
-8. **Ajuste das rotas de autenticação**
+7. **Ajuste das rotas de autenticação**
    - Em `routes/api.php`:
      ```php
      Route::post('/register', [RegisteredUserController::class, 'store']);
@@ -115,7 +86,7 @@ biblioteca/
      });
      ```
 
-9. **Testes de autenticação (via Postman/cURL)**
+8. **Testes de autenticação (via Postman/cURL)**
    - Registro: `POST /api/register`
    - Login: `POST /api/login` (retorna token)
    - Rotas protegidas: `GET /api/user` (usa header `Authorization: Bearer {token}`)
@@ -167,8 +138,8 @@ biblioteca/
 - Body (JSON):
   ```json
   {
-    "name": "Novo Usuário",
-    "email": "novo@usuario.com",
+    "name": "Administrador",
+    "email": "admin@biblioteca.com",
     "password": "Senha123!",
     "password_confirmation": "Senha123!"
   }
@@ -180,17 +151,26 @@ biblioteca/
 - Body (JSON):
   ```json
   {
-    "email": "novo@usuario.com",
+    "email": "admin@biblioteca.com",
     "password": "Senha123!"
   }
   ```
 
 - Retorno esperado:
   ```json
-  {
-    "user": { ... },
-    "token": "eyJ0eXAiOiJKV1QiLCJ..."
-  }
+{
+    "user": {
+        "id": 1,
+        "name": "Administrador",
+        "email": "admin@biblioteca.com",
+        "email_verified_at": null,
+        "role": "admin",
+        "status": 1,
+        "created_at": "2025-06-06T21:06:24.000000Z",
+        "updated_at": "2025-06-06T21:06:24.000000Z"
+    },
+    "token": "3|dx5jFzKk82IQuoVD4Wc3WSkShsnI2hduHVjzSjl5fd806242"
+}
   ```
 
 ### **Acesso a rota protegida**
