@@ -158,19 +158,19 @@ API desenvolvida em **Laravel 12** para gerenciamento de empréstimos de livros,
 
 - Retorno esperado:
   ```json
-{
-    "user": {
-        "id": 1,
-        "name": "Administrador",
-        "email": "admin@biblioteca.com",
-        "email_verified_at": null,
-        "role": "admin",
-        "status": 1,
-        "created_at": "2025-06-06T21:06:24.000000Z",
-        "updated_at": "2025-06-06T21:06:24.000000Z"
-    },
-    "token": "3|dx5jFzKk82IQuoVD4Wc3WSkShsnI2hduHVjzSjl5fd806242"
-}
+    {
+        "user": {
+            "id": 1,
+            "name": "Administrador",
+            "email": "admin@biblioteca.com",
+            "email_verified_at": null,
+            "role": "admin",
+            "status": 1,
+            "created_at": "2025-06-06T21:06:24.000000Z",
+            "updated_at": "2025-06-06T21:06:24.000000Z"
+        },
+        "token": "3|dx5jFzKk82IQuoVD4Wc3WSkShsnI2hduHVjzSjl5fd806242"
+    }
   ```
 
 ### **Acesso a rota protegida**
