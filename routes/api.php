@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\AutorController;
 
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
@@ -20,4 +21,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
     Route::put('/categorias/{id}', [CategoriaController::class, 'update']);
     Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy']);
+});
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/autores', [AutorController::class, 'index']);
+    Route::post('/autores', [AutorController::class, 'store']);
+    Route::get('/autores/{id}', [AutorController::class, 'show']);
+    Route::put('/autores/{id}', [AutorController::class, 'update']);
+    Route::delete('/autores/{id}', [AutorController::class, 'destroy']);
 });
